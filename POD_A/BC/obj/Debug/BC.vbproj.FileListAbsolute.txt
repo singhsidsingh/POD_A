@@ -1,0 +1,8 @@
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\bin\Debug\BC.dll
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\bin\Debug\BC.pdb
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\bin\Debug\BC.xml
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.Resources.resources
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.vbproj.GenerateResource.Cache
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.dll
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.xml
+C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.pdb
