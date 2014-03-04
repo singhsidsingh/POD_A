@@ -6,3 +6,11 @@ C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.vbproj.GenerateResour
 C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.dll
 C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.xml
 C:\Users\siddharthsingh\Desktop\3MAR\POD_A\BC\obj\Debug\BC.pdb
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\bin\Debug\BC.dll
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\bin\Debug\BC.pdb
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\bin\Debug\BC.xml
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\obj\Debug\BC.Resources.resources
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\obj\Debug\BC.vbproj.GenerateResource.Cache
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\obj\Debug\BC.dll
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\obj\Debug\BC.xml
+C:\Users\675299\Documents\TCS Internal\WIP\Code\POD_MARCH\POD_A-3MARCH\POD_A\BC\obj\Debug\BC.pdb

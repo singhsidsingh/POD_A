@@ -16,6 +16,8 @@ Public Class BC
     'CONSTANTS contains the names of the back end procedures.
     'IBC is the interface which is implemented by this class.
 
+    'Must find alternatives for OracleConnection and OracleCommand.
+    '(They are deprecated, as can be seen below.)
     Private connection As OracleConnection = Nothing
     Private command As OracleCommand = Nothing
     Private backend_error_msg As String = ""
@@ -652,6 +654,797 @@ Public Class BC
             Else
                 'An error occurred. Throw an exception with the error message returned from the back end.
                 backend_error_msg = lobjParam(13).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all details of all the roles.
+    ''' </summary>
+    ''' <returns>Datatable containing details of all the roles is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Roles() As DataTable Implements IBC.fetch_All_Roles
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_ROLES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all details of all the projects.
+    ''' </summary>
+    ''' <returns>Datatable containing details of all the projects is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Projects() As DataTable Implements IBC.fetch_All_Projects
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_PROJECTS, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all details of all the modules.
+    ''' </summary>
+    ''' <returns>Datatable containing details of all the modules is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Modules() As DataTable Implements IBC.fetch_All_Modules
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_MODULES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all details of all the employees.
+    ''' </summary>
+    ''' <returns>Datatable containing details of all the employees is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Employees() As DataTable Implements IBC.fetch_All_Employees
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_EMPLOYEES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all details of all the weekly reports.
+    ''' </summary>
+    ''' <returns>Datatable containing details of all the weekly reports is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_WeeklyReports() As DataTable Implements IBC.fetch_All_WeeklyReports
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_WEEKLYREPORTS, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch the ids', names and descriptions of all projects.
+    ''' </summary>
+    ''' <returns>Datatable containing ids', names and descriptions of all the projects is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_Id_Name_Desc_Projects() As DataTable Implements IBC.fetch_Id_Name_Desc_Projects
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ID_NAME_DESC_OF_PROJECTS, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all the details of all the modules of a particular project.
+    ''' </summary>
+    ''' <param name="id_project_module_bc"></param>
+    ''' <returns>Datatable containing all the details of all the modules of a particular project is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Modules_Of_Project(ByVal id_project_module_bc As Integer) As DataTable Implements IBC.fetch_All_Modules_Of_Project
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(2) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will specify the id of the project for which the details of the modules are being fetched.
+            lobjParam(0) = New OracleParameter("id_project_module", OracleType.Number)
+            lobjParam(0).Value = id_project_module_bc
+            lobjParam(0).Direction = ParameterDirection.Input
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(1) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(1).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(2) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(2).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(2).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_MODULES_OF_PROJECT, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(2).Value Is DBNull.Value Or lobjParam(2).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(2).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the details of one particular employee, identified by his SSO.
+    ''' </summary>
+    ''' <param name="SSO_employee_bc"></param>
+    ''' <returns>Datatable containing all the details of a particular employee is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Details_From_SSO(ByVal SSO_employee_bc As String) As DataTable Implements IBC.fetch_All_Details_From_SSO
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(2) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will specify the SSO id of the employee whose details are to be fetched.
+            lobjParam(0) = New OracleParameter("SSO_employee", OracleType.Number)
+            lobjParam(0).Value = SSO_employee_bc
+            lobjParam(0).Direction = ParameterDirection.Input
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(1) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(1).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(2) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(2).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(2).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_DETAILS_OF_EMPLOYEE_FROM_SSO, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(2).Value Is DBNull.Value Or lobjParam(2).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(2).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the details of one particular employee, identified by his Employee ID.
+    ''' </summary>
+    ''' <param name="empid_employee_bc"></param>
+    ''' <returns>Datatable containing all the details of a particular employee are returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Details_From_Empid(ByVal empid_employee_bc As String) As DataTable Implements IBC.fetch_All_Details_From_Empid
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(2) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will specify the employee id of the employee whose details are to be fetched.
+            lobjParam(0) = New OracleParameter("empid_employee", OracleType.Number)
+            lobjParam(0).Value = empid_employee_bc
+            lobjParam(0).Direction = ParameterDirection.Input
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(1) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(1).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(2) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(2).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(2).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_DETAILS_OF_EMPLOYEE_FROM_EMPID, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(2).Value Is DBNull.Value Or lobjParam(2).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(2).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the details of one particular employee, identified by his name.
+    ''' </summary>
+    ''' <param name="name_employee_bc"></param>
+    ''' <returns>Datatable containing all the details of a particular employee are returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_All_Details_From_Name(ByVal name_employee_bc As String) As DataTable Implements IBC.fetch_All_Details_From_Name
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(2) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will specify the name of the employee whose details are to be fetched.
+            lobjParam(0) = New OracleParameter("name_employee", OracleType.Number)
+            lobjParam(0).Value = name_employee_bc
+            lobjParam(0).Direction = ParameterDirection.Input
+
+            'The following will fetch the cursor containing all the roles.
+            lobjParam(1) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(1).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(2) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(2).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(2).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_ALL_DETAILS_OF_EMPLOYEE_FROM_NAME, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(2).Value Is DBNull.Value Or lobjParam(2).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(2).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the SSOs in the system.
+    ''' </summary>
+    ''' <returns>Datatable containing all SSOs stored in the back end is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_SSO_Of_Employees() As DataTable Implements IBC.fetch_SSO_Of_Employees
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the SSO ids.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_SSO_OF_EMPLOYEES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the employee ids' in the system.
+    ''' </summary>
+    ''' <returns>Datatable containing all employee ids' stored in the back end is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_Empid_Of_Employees() As DataTable Implements IBC.fetch_Empid_Of_Employees
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the employee ids.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_EMPID_OF_EMPLOYEES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
+                Throw New Exception(backend_error_msg)
+            End If
+
+        Catch ex As Exception
+            'Simply throw the exception that has been caught.
+            'It will be handled in the code behind page.
+            Throw ex
+        Finally
+            'The following code will ensure that the connection is closed after processing is done. Always.
+            If connection IsNot Nothing AndAlso connection.State = ConnectionState.Closed Then
+                connection.Close()
+            End If
+            command.Parameters.Clear()
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Function to fetch all of the employee names in the system.
+    ''' </summary>
+    ''' <returns>Datatable containing all employee names stored in the back end is returned.</returns>
+    ''' <remarks></remarks>
+    Function fetch_Name_Of_Employees() As DataTable Implements IBC.fetch_Name_Of_Employees
+        Try
+            'Declaring an array of OracleParameter objects which will transport/fetch our values to/from the back end.
+            Dim lobjParam(1) As OracleParameter
+
+            'The following will capture the cursor being returned from the back end.
+            Dim dt As DataTable = New DataTable()
+
+            'The following will fetch the cursor containing all the employee names.
+            lobjParam(0) = New OracleParameter("p_out_data", OracleType.Cursor)
+            lobjParam(0).Direction = ParameterDirection.Output
+
+            'The following will be used to capture any error that occurs in the back end.
+            lobjParam(1) = New OracleParameter("p_out_error", OracleType.VarChar)
+            lobjParam(1).Direction = ParameterDirection.Output
+            'For some reason, not specifying the size here results in an error.
+            lobjParam(1).Size = 255
+
+            'Opening the connection.
+            connection.Open()
+
+            'Specifying the command (in this case, a stored procedure) to be executed and the connection
+            'object to be used.
+            command = New OracleCommand(CONST_FETCH_NAME_OF_EMPLOYEES, connection)
+            command.CommandType = CommandType.StoredProcedure
+            'Adding the parameters to be passed to the back end procedure.
+            command.Parameters.AddRange(lobjParam)
+
+            'Loading the values being returned from the back end into our datatable.
+            dt.Load(command.ExecuteReader())
+
+            'Checking if any error occured in the back end.
+            If lobjParam(1).Value Is DBNull.Value Or lobjParam(1).Value.ToString().Equals("") Then
+                'No error. Return the datatable.
+                Return dt
+            Else
+                'An error occurred. Throw an exception with the error message returned from the back end.
+                backend_error_msg = lobjParam(1).Value.ToString()
                 Throw New Exception(backend_error_msg)
             End If
 

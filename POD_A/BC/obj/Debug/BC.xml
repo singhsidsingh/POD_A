@@ -6,7 +6,20 @@ BC
 </name>
 </assembly>
 <members>
-<member name="M:BC.BC.#ctor(System.String)">
+<member name="P:BC.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:BC.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:BC.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:BC.BC.#ctor(System.String)">
 	<summary>
  Constructor overloading for BC class takes connection string as
  its input parameter and initializes the connection with it.
@@ -94,24 +107,47 @@ BC
 	<param name="dateupdated_wr_bc"></param>
 	<returns>Returns 1 if operation is successful, 0 otherwise.</returns>
 	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_All_Roles">
+	<summary>
+ Function to fetch all details of all the roles.
+ </summary>
+	<returns>Datatable containing details of all the roles is returned.</returns>
+	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_All_Projects">
+	<summary>
+ Function to fetch all details of all the projects.
+ </summary>
+	<returns>Datatable containing details of all the projects is returned.</returns>
+	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_All_Modules">
+	<summary>
+ Function to fetch all details of all the modules.
+ </summary>
+	<returns>Datatable containing details of all the modules is returned.</returns>
+	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_All_Employees">
+	<summary>
+ Function to fetch all details of all the employees.
+ </summary>
+	<returns>Datatable containing details of all the employees is returned.</returns>
+	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_All_WeeklyReports">
+	<summary>
+ Function to fetch all details of all the weekly reports.
+ </summary>
+	<returns>Datatable containing details of all the weekly reports is returned.</returns>
+	<remarks></remarks>
+</member><member name="M:BC.BC.fetch_Id_Name_Desc_Projects">
+	<summary>
+ Function to fetch the ids', names and descriptions of all projects.
+ </summary>
+	<returns>Datatable containing ids', names and descriptionf of all the projects is returned.</returns>
+	<remarks></remarks>
 </member><member name="T:BC.BC">
 	<summary>
  This class is where contact is established and data exchanged with the back end.
  </summary>
 	<remarks></remarks>
-</member><member name="P:BC.My.Resources.Resources.ResourceManager">
-	<summary>
-  Returns the cached ResourceManager instance used by this class.
-</summary>
-</member><member name="P:BC.My.Resources.Resources.Culture">
-	<summary>
-  Overrides the current thread's CurrentUICulture property for all
-  resource lookups using this strongly typed resource class.
-</summary>
-</member><member name="T:BC.My.Resources.Resources">
-	<summary>
-  A strongly-typed resource class, for looking up localized strings, etc.
-</summary>
 </member>
 </members>
 </doc>

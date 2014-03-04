@@ -11,4 +11,30 @@
 
     Function add_New_Weekly_Report(ByVal id_project_wr_ibc As Integer, ByVal id_module_wr_ibc As Integer, ByVal releaseid_wr_ibc As Integer, ByVal releasedescription_wr_ibc As String, ByVal noofresources_wr_ibc As Integer, ByVal resourcessoids_wr_ibc As String, ByVal sow_wr_ibc As String, ByVal comments_wr_ibc As String, ByVal status_wr_ibc As String, ByVal createdby_wr_ibc As String, ByVal datecreated_wr_ibc As Date, ByVal updatedby_wr_ibc As String, ByVal dateupdated_wr_ibc As Date) As Integer
 
+    Function fetch_All_Roles() As DataTable
+
+    Function fetch_All_Projects() As DataTable
+
+    Function fetch_All_Modules() As DataTable
+
+    Function fetch_All_Employees() As DataTable
+
+    Function fetch_All_WeeklyReports() As DataTable
+
+    Function fetch_Id_Name_Desc_Projects() As DataTable
+
+    Function fetch_All_Modules_Of_Project(ByVal id_project_module_ibc As Integer) As DataTable
+
+    Function fetch_All_Details_From_SSO(ByVal SSO_employee_ibc As String) As DataTable
+
+    Function fetch_All_Details_From_Empid(ByVal empid_employee_ibc As String) As DataTable
+
+    Function fetch_All_Details_From_Name(ByVal name_employee_ibc As String) As DataTable
+
+    Function fetch_SSO_Of_Employees() As DataTable
+
+    Function fetch_Empid_Of_Employees() As DataTable
+
+    Function fetch_Name_Of_Employees() As DataTable
+
 End Interface
